@@ -1,0 +1,39 @@
+/include/ "system-conf.dtsi"
+/ {
+};
+/ {
+	memory {
+		device_type = "memory";
+		reg = <0x0 0x19ffffff>;
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+		rproc_0_reserved: rproc@18000000 {
+			no-map;
+			reg = <0x18000000 0x400000>;
+		};
+		rproc_0_dma: rproc@18800000 {
+			no-map;
+			compatible = "shared-dma-pool";
+			reg = <0x18800000 0x100000>;
+		};
+		shm0: shm@0 {
+			compatible = "1ef00000.shm";
+			reg = < 0x1Cf00000  0x32000 >;
+		
+		};
+	};
+		
+	remoteproc0: remoteproc@0 {
+		compatible = "xlnx,zynq_remoteproc";
+		firmware = "firmware";
+		vring0 = <15>;
+		vring1 = <14>;
+		memory-region = <&rproc_0_reserved>, <&rproc_0_dma>;
+	};
+	
+
+};
