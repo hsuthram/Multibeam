@@ -5,25 +5,25 @@
 
 	memory {
 		device_type = "memory";
-		reg = <0x0 0x19ffffff>;
+		reg = <0x0 0x39ffffff>;
 	};
 
 	reserved-memory {
 		#address-cells = <1>;
 		#size-cells = <1>;
 		ranges;
-		rproc_0_reserved: rproc@18000000 {
+		rproc_0_reserved: rproc@38000000 {
 			no-map;
-			reg = <0x18000000 0x500000>;
+			reg = <0x38000000 0x500000>;
 		};
-		rproc_0_dma: rproc@18800000 {
+		rproc_0_dma: rproc@38800000 {
 			no-map;
 			compatible = "shared-dma-pool";
-			reg = <0x18800000 0x100000>;
+			reg = <0x38800000 0x100000>;
 		};
 		shm0: shm@0 {
-			compatible = "1cf00000.shm";
-			reg = < 0x1Cf00000  0x32000 >;
+			compatible = "3cf00000.shm";
+			reg = < 0x3Cf00000  0x32000 >;
 		
 		};
 	};
@@ -47,6 +47,39 @@ aliases {
       /delete-node/ spi@e0006000;
 
 };
+&qspi {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	flash0: flash@0 {
+		compatible = "spansion,s25fl128s1", "n25q512a","micron,m25p80","jedec,spi-nor";
+		reg = <0x0>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		spi-max-frequency = <50000000>;
+		partition@0x00000000 {
+			label = "boot";
+			reg = <0x00000000 0x00300000>;
+		};
+		partition@0x00500000 {
+			label = "bootenv";
+			reg = <0x00500000 0x00020000>;
+		};
+		partition@0x00520000 {
+			label = "kernel";
+			reg = <0x00520000 0x00a80000>;
+		};
+		partition@0x00fa0000 {
+			label = "spare";
+			reg = <0x00da0000 0x00000000>;
+		};
+	};
+};
+&sdhci1 {
+	status = "okay";
+	/* SD1 is connected to non-removable eMMC flash device*/
+	non-removable;
+};
+
 
 
  
