@@ -182,20 +182,6 @@
 			port-number = <0x0>;
 		};
 
-		spi@e0006000 {
-			compatible = "xlnx,zynq-spi-r1p6";
-			reg = <0xe0006000 0x1000>;
-			status = "okay";
-			interrupt-parent = <0x4>;
-			interrupts = <0x0 0x1a 0x4>;
-			clocks = <0x1 0x19 0x1 0x22>;
-			clock-names = "ref_clk", "pclk";
-			#address-cells = <0x1>;
-			#size-cells = <0x0>;
-			is-decoded-cs = <0x0>;
-			num-cs = <0x3>;
-		};
-
 		spi@e0007000 {
 			compatible = "xlnx,zynq-spi-r1p6";
 			reg = <0xe0007000 0x1000>;
@@ -469,7 +455,7 @@
 			compatible = "xlnx,axi-dma-7.1", "xlnx,axi-dma-1.00.a";
 			interrupt-names = "s2mm_introut";
 			interrupt-parent = <0x4>;
-			interrupts = <0x0 0x1c 0x4>;
+			interrupts = <0x0 0x1d 0x4>;
 			reg = <0x40400000 0x10000>;
 			xlnx,addrwidth = <0x20>;
 			xlnx,include-sg;
@@ -478,7 +464,7 @@
 			dma-channel@40400030 {
 				compatible = "xlnx,axi-dma-s2mm-channel";
 				dma-channels = <0x1>;
-				interrupts = <0x0 0x1c 0x4>;
+				interrupts = <0x0 0x1d 0x4>;
 				xlnx,datawidth = <0x20>;
 				xlnx,device-id = <0x0>;
 			};
@@ -503,13 +489,6 @@
 			xlnx,is-dual = <0x0>;
 			xlnx,tri-default = <0xffffffff>;
 			xlnx,tri-default-2 = <0xffffffff>;
-		};
-
-		jo_beamform_01@43c60000 {
-			clock-names = "clk";
-			clocks = <0x1 0xf>;
-			compatible = "xlnx,jo-beamform-01-1.0";
-			reg = <0x43c60000 0x10000>;
 		};
 
 		jo_decimator_r2c@43c50000 {
@@ -540,18 +519,18 @@
 			reg = <0x43c20000 0x10000>;
 		};
 
-		jo_pwm_arbitrary@43c70000 {
-			clock-names = "clk";
-			clocks = <0x1 0xf>;
-			compatible = "xlnx,jo-pwm-arbitrary-1.0";
-			reg = <0x43c70000 0x10000>;
-		};
-
 		jo_mux_index_shuffle@43c30000 {
 			clock-names = "clk";
 			clocks = <0x1 0xf>;
 			compatible = "xlnx,jo-mux-index-shuffle-1.0";
 			reg = <0x43c30000 0x10000>;
+		};
+
+		jo_pwm_arbitrary@43c60000 {
+			clock-names = "clk";
+			clocks = <0x1 0xf>;
+			compatible = "xlnx,jo-pwm-arbitrary-1.0";
+			reg = <0x43c60000 0x10000>;
 		};
 
 		jo_undersamp_ctrl@43c10000 {
@@ -571,7 +550,6 @@
 		ethernet0 = "/amba/ethernet@e000b000";
 		serial0 = "/amba/serial@e0001000";
 		spi0 = "/amba/spi@e000d000";
-		spi1 = "/amba/spi@e0006000";
 		spi2 = "/amba/spi@e0007000";
 	};
 
@@ -587,7 +565,7 @@
 
 		rproc@18000000 {
 			no-map;
-			reg = <0x18000000 0x400000>;
+			reg = <0x18000000 0x500000>;
 			phandle = <0x6>;
 		};
 
@@ -599,7 +577,7 @@
 		};
 
 		shm@0 {
-			compatible = "1ef00000.shm";
+			compatible = "1cf00000.shm";
 			reg = <0x1cf00000 0x32000>;
 		};
 	};

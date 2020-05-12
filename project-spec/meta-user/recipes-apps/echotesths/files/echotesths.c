@@ -68,7 +68,7 @@ pingpacket_t packettosend;
 
  #define RPMSG_BUS_SYS1 "/sys/bus/rpmsg"
 
- char fw_dst_path[] = "/lib/firmware/openamp.elf";// "/lib/firmware/echo-test-a9-1.elf";
+ char fw_dst_path[] = "/lib/firmware/jo_MBc2.elf";// "/lib/firmware/echo-test-a9-1.elf";
  char sbuf[512];
  int r5_id = 0;
 
@@ -106,7 +106,7 @@ pingpacket_t packettosend;
  {
  	system("modprobe -r rpmsg_char");
  	sprintf(sbuf,
- 		"/sys/class/remoteproc/remoteproc%u/state",
+ 		"/sys/class/remoteproc/remoteproc%u/state \r\n",
  		r5_id);
  	(void)file_write(sbuf, "stop");
  }
@@ -156,7 +156,7 @@ printf("%ld\n", currentTimeMillis());
 		sprintf(sbuf,
 			"/sys/class/remoteproc/remoteproc%u/firmware",
 			r5_id);
-		if (0 != file_write(sbuf, "echo-test-a9-1.elf")) {
+		if (0 != file_write(sbuf, "jo_MBc2.elf")) {
 			return -EINVAL;
 		}
 
@@ -176,6 +176,7 @@ printf("%ld\n", currentTimeMillis());
 			goto error0;
 		}
 
+		usleep(100000);
 
 //	time_t mytime;
 //			mytime = time(NULL);
@@ -262,9 +263,9 @@ printf(" values sent %x\r\n", i_payload->data[sendingvalues]);
 			/* Mark the data buffer. */
 	//		memset(&(i_payload->data[0]), 0xA5, size);
 
-			printf("\r\n sending payload number");
-			printf(" %ld of size %d\r\n", i_payload->num,
-			(2 * sizeof(unsigned long)) + size);
+	//		printf("\r\n sending payload number");
+	//		printf(" %ld of size %d\r\n", i_payload->num,
+	//		(2 * sizeof(unsigned long)) + size);
 
 			bytes_sent = write(fd, i_payload,
 			(2 * sizeof(unsigned long)) + size);
@@ -276,10 +277,12 @@ printf(" values sent %x\r\n", i_payload->data[sendingvalues]);
 			}
 			printf("echo test: sent : %d\n", bytes_sent);
 
+
 			r_payload->num = 0;
 			bytes_rcvd = read(fd, r_payload,128);
 				//	(2 * sizeof(unsigned long)) + PAYLOAD_MAX_SIZE);
 			while (bytes_rcvd <= 0) {
+//printf(" \r\nwaiting \r\n");
 				usleep(10000);
 				bytes_rcvd = read(fd, r_payload,
 					(2 * sizeof(unsigned long)) + PAYLOAD_MAX_SIZE);
@@ -290,7 +293,7 @@ printf(" values sent %x\r\n", i_payload->data[sendingvalues]);
 			/* Validate data buffer integrity. */
 			for (k = 0; k < bytes_rcvd; k++) {
 
-					printf(" data at index %d\r\n is %x \r\n",k ,r_payload->data[k]);
+				//	printf(" data at index %d\r\n is %x \r\n",k ,r_payload->data[k]);
 
 			}
 			bytes_rcvd = read(fd, r_payload,

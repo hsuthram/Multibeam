@@ -9,8 +9,7 @@ INCLUDE_DIRS = /home/hasitha/MegaLive/MegaLiveProj/project-spec/meta-user/recipe
 C_INCLUDE = $(foreach INCLUDE_PATH, $(INCLUDE_DIRS), -I$(INCLUDE_PATH))
 
 # Add any other object files to this list below
-
-#CC:=arm-linux-gnueabihf-gcc #need to remove this for petalinux-build
+#CC:=arm-linux-gnueabihf-gcc #arm-linux-gnueabihf-gcc #need to remove this for petalinux-build
 all: $(APP)
 
 $(APP): $(APP_OBJS)  
