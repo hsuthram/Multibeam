@@ -8,6 +8,10 @@
 		reg = <0x0 0x19ffffff>;
 	};
 
+      chosen {
+		bootargs = "earlycon clk_ignore_unused" ;
+		
+	};
 	reserved-memory {
 		#address-cells = <1>;
 		#size-cells = <1>;
