@@ -3945,12 +3945,12 @@ CONFIG_echotesths=y
 CONFIG_myapp-init=y
 # CONFIG_peekpoke is not set
 # CONFIG_sonarapp is not set
-CONFIG_spitestap=y
 
 #
 # user packages 
 #
 CONFIG_openslp=y
+# CONFIG_spitestap is not set
 
 #
 # PetaLinux RootFS Settings
