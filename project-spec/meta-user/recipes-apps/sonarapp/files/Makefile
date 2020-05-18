@@ -1,38 +1,22 @@
-#CC:=arm-linux-gnueabihf-gcc
-#CC:=arm-xilinx-linux-gnueabi-gcc
+APP = sonarapp
 
-ROOT = `pwd`
+# Add any other object files to this list below
+src=$(wildcard src/*.c) \
+      $(wildcard src/LSVC/*.c) \
+      $(wildcard src/common/*.c)
 
-myslp = $(ROOT)/../openslp_zynq
+APP_OBJS = $(patsubst %.c,%.o,$(SRC))
 
-LINUX_SVC = LSVC
-COMMON = common
-#FABRIC = fabric
 
-INCLUDE_DIRS = $(ROOT) \
-               $(ROOT)/$(LINUX_SVC) \
-               $(ROOT)/$(COMMON) \
-           #    $(ROOT)/$(FABRIC) \
-	       $(myslp)/include
+all: build
 
-C_INCLUDE = $(foreach INCLUDE_PATH, $(INCLUDE_DIRS), -I$(INCLUDE_PATH))
+build: $(APP)
 
-src = $(wildcard LSVC/*.c) \
-      $(wildcard common/*.c) \
- #     $(wildcard fabric/*.c) \
-      $(wildcard *.c)
+$(APP): $(APP_OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(APP_OBJS) $(LDLIBS) -Wl,-rpath-link, -Wl,-O1 -Wl,--hash-style=gnu -Wl,--allow-multiple-definition -nostartfiles
 
-obj = $(src:.c=.o)
+%.o: %.c
+	$(CC) -c $< $(CFLAGS) -o $@
 
-CFLAGS = -D__RTXC__ \
-	 -D_GNU_SOURCE \
-         $(C_INCLUDE)
-
-LDFLAGS = -pthread -lrt -lm -L$(myslp)/lib -lslp
-
-mbsonar: $(obj) 
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-.PHONY: clean
 clean:
-	rm -f $(obj) mbsonar
+	rm -f $(wildcard *.o) sonarapp

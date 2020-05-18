@@ -3944,13 +3944,13 @@ CONFIG_echotesths=y
 # CONFIG_gpio-demo is not set
 CONFIG_myapp-init=y
 # CONFIG_peekpoke is not set
-# CONFIG_sonarapp is not set
+CONFIG_sonarapp=y
+# CONFIG_spitestap is not set
 
 #
 # user packages 
 #
 CONFIG_openslp=y
-# CONFIG_spitestap is not set
 
 #
 # PetaLinux RootFS Settings
