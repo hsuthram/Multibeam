@@ -13,7 +13,7 @@ SRC_URI = "\
 	file://echotesths.c \
 	file://rpmsg_utility.c\
 	file://sharememechotest.c\
-	file://echo-test-a9-1.elf\
+	file://jo_MBc2.elf\
 	"
 
 S = "${WORKDIR}"
@@ -22,7 +22,7 @@ RRECOMMENDS_${PN} = "kernel-module-rpmsg-char"
 
 FILES_${PN} = "\
 	/usr/bin/echotesths\ 
-       /lib/firmware/echo-test-a9-1.elf\
+       /lib/firmware/jo_MBc2.elf\
 "
 
 
@@ -30,7 +30,7 @@ do_install () {
 
      	# Install firmware into /lib/firmware on target   
       	install -d ${D}/lib/firmware   
-      	install -m 0644 ${S}/echo-test-a9-1.elf ${D}/lib/firmware/echo-test-a9-1.elf
+      	install -m 0644 ${S}/jo_MBc2.elf ${D}/lib/firmware/jo_MBc2.elf
 
 	install -d ${D}/usr/bin
 	install -m 0755 echotesths ${D}/usr/bin/echotesths
