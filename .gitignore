@@ -15,5 +15,6 @@ project-spec/meta-plnx-generated/recipes-bsp/device-tree/device-tree-generation_
 project-spec/meta-plnx-generated/recipes-bsp/u-boot/configs/config.cfg
 project-spec/meta-plnx-generated/recipes-bsp/u-boot/u-boot-xlnx_%.bbappend
 project-spec/meta-plnx-generated/recipes-kernel/linux/linux-xlnx_%.bbappend
+/components
 */*/*/*/*/subdir.mk
 */*/*/.cproject
