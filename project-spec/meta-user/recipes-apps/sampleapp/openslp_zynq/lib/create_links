@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ln -s libslp.so.1.0.0 libslp.so
+ln -s libslp.so.1.0.0 libslp.so.1
