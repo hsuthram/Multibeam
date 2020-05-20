@@ -8,3 +8,4 @@ CONFIG_openslp
 CONFIG_echotesths
 #CONFIG_sonarapp
 CONFIG_spitestap
+CONFIG_sampleapp
