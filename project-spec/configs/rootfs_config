@@ -3944,7 +3944,8 @@ CONFIG_echotesths=y
 # CONFIG_gpio-demo is not set
 CONFIG_myapp-init=y
 # CONFIG_peekpoke is not set
-CONFIG_sonarapp=y
+CONFIG_sampleapp=y
+# CONFIG_sonarapp is not set
 # CONFIG_spitestap is not set
 
 #
